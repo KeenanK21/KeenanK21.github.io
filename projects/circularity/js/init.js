@@ -22,17 +22,18 @@ var init = function (window) {
         // TODO 1 : Declare and initialize our variables
         var circle;
         var circles = [];
+        
         // TODO 2 : Create a function that draws a circle 
         function drawCircle (){
             circle = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-            physikz.addRandomVelocity(circle, canvas, 10, 10);
+            physikz.addRandomVelocity(circle, canvas, 1000, 1000);
             view.addChild(circle);
             circles.push(circle);
         }
 
         // TODO 3 / 7 : Call the drawCircle() function 
             var loopsCompleted = 0; 
-                 while (loopsCompleted < 100) {
+                 while (loopsCompleted < 10000) {
                  drawCircle();
                  loopsCompleted++
             }
@@ -61,7 +62,7 @@ var init = function (window) {
                 physikz.updatePosition(circles[i])
                 game.checkCirclePosition(circles[i])
                 }
-            
+
             }
     
         /* 
@@ -72,22 +73,23 @@ var init = function (window) {
         game.checkCirclePosition = function(circle) {
 
             // if the circle has gone past the RIGHT side of the screen then place it on the LEFT
-            if ( circle.x > canvas.width ) {
-                circle.x = 0;
-            }
+            
             
             
             // TODO 6 : YOUR CODE STARTS HERE //////////////////////
-            if ( circle.y > canvas.height ) {
-                circle.y = 0;
+           
+            if ( circle.x > canvas.width) {
+                circle.velocityX = circle.velocityX * -1;
+            }
+            if ( circle.y > canvas.height) {
+                circle.velocityY = circle.velocityY * -1;
             }
             if ( circle.x < 0) {
-                circle.x = canvas.width;
+                circle.velocityX = circle.velocityX * -1;
             }
-            if ( circle.y < 0) {
-                circle.y = canvas.height;
+             if ( circle.y < 0 ) {
+                circle.velocityY = circle.velocityY * -1;
             }
-            
             
 
             // YOUR TODO 6 CODE ENDS HERE //////////////////////////
